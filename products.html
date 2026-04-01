@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop All Products – LuxeCraft</title>
+  <meta name="description" content="Browse our full collection of handcrafted home décor, textiles, lifestyle and kitchen products.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Luxe<span>Craft</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <a href="contact.html" class="btn btn-primary" style="padding:0.6rem 1.25rem;font-size:0.8rem;">Get in Touch</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="products.html">Shop All Products</a>
+  <a href="about.html">About Us</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="page-header">
+  <div class="container">
+    <span class="section-label">Our Collection</span>
+    <h1>Shop All Products</h1>
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <span>Shop</span>
+    </div>
+  </div>
+</div>
+
+<div class="products-page">
+  <div class="container">
+    <div class="products-layout">
+
+      <!-- SIDEBAR FILTERS -->
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-header">
+            <h4>🔽 Filters</h4>
+            <span class="sidebar-clear" onclick="clearFilters()">Clear all</span>
+          </div>
+
+          <div class="filter-group">
+            <div class="filter-group-title">Category</div>
+            <label class="filter-option">
+              <input type="checkbox" name="cat" value="home-decor" onchange="applyFilters()">
+              <span class="filter-checkbox"></span>
+              <span class="filter-label">Home Décor</span>
+              <span class="filter-count">3</span>
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" name="cat" value="textiles" onchange="applyFilters()">
+              <span class="filter-checkbox"></span>
+              <span class="filter-label">Textiles</span>
+              <span class="filter-count">2</span>
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" name="cat" value="lifestyle" onchange="applyFilters()">
+              <span class="filter-checkbox"></span>
+              <span class="filter-label">Lifestyle</span>
+              <span class="filter-count">2</span>
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" name="cat" value="kitchen" onchange="applyFilters()">
+              <span class="filter-checkbox"></span>
+              <span class="filter-label">Kitchen</span>
+              <span class="filter-count">1</span>
+            </label>
+          </div>
+
+          <div class="filter-group">
+            <div class="filter-group-title">Price Range (৳)</div>
+            <div class="price-range">
+              <div class="price-inputs">
+                <input type="number" class="price-input" id="price-min" placeholder="Min" onchange="applyFilters()">
+                <span class="price-sep">—</span>
+                <input type="number" class="price-input" id="price-max" placeholder="Max" onchange="applyFilters()">
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <div class="filter-group-title">Availability</div>
+            <label class="filter-option">
+              <input type="checkbox" name="badge" value="new" onchange="applyFilters()">
+              <span class="filter-checkbox"></span>
+              <span class="filter-label">New Arrivals</span>
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" name="badge" value="sale" onchange="applyFilters()">
+              <span class="filter-checkbox"></span>
+              <span class="filter-label">On Sale</span>
+            </label>
+          </div>
+
+          <div class="filter-group">
+            <div class="filter-group-title">Rating</div>
+            <label class="filter-option">
+              <input type="radio" name="rating" value="4.5" onchange="applyFilters()">
+              <span class="filter-checkbox"></span>
+              <span class="filter-label">★★★★★ 4.5+</span>
+            </label>
+            <label class="filter-option">
+              <input type="radio" name="rating" value="4" onchange="applyFilters()">
+              <span class="filter-checkbox"></span>
+              <span class="filter-label">★★★★☆ 4.0+</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Mobile Filter Toggle -->
+        <button id="filter-toggle" class="btn btn-outline" style="width:100%;justify-content:center;margin-top:1rem;display:none;" onclick="toggleFilters()">Show Filters ▼</button>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main>
+        <div class="products-toolbar">
+          <p class="products-count">Showing <strong id="count">8</strong> products</p>
+          <div class="toolbar-right">
+            <select class="sort-select" onchange="applyFilters()">
+              <option value="default">Sort: Featured</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Top Rated</option>
+            </select>
+            <div class="view-toggle">
+              <button class="view-btn active" id="grid-btn" onclick="setView('grid')" title="Grid view">⊞</button>
+              <button class="view-btn" id="list-btn" onclick="setView('list')" title="List view">☰</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="products-container"></div>
+
+        <div id="no-results" style="display:none;text-align:center;padding:4rem;color:var(--muted);">
+          <div style="font-size:3rem;margin-bottom:1rem;">🔍</div>
+          <h3 style="font-family:var(--font-display);margin-bottom:0.5rem;">No products found</h3>
+          <p>Try adjusting your filters to find what you're looking for.</p>
+          <button class="btn btn-outline" onclick="clearFilters()" style="margin-top:1.5rem;">Clear Filters</button>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">Luxe<span>Craft</span></div>
+        <p class="footer-desc">Artisan home goods made with purpose and passion.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">ig</a>
+          <a href="#" aria-label="Pinterest">P</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="products.html">All Products</a></li>
+          <li><a href="products.html?cat=home-decor">Home Décor</a></li>
+          <li><a href="products.html?cat=textiles">Textiles</a></li>
+          <li><a href="products.html?cat=lifestyle">Lifestyle</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Return Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact">
+          <div class="footer-contact-item">
+            <span class="icon">📞</span>
+            <span>+880 1700-000000</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="icon">✉️</span>
+            <span>hello@luxecraft.bd</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 LuxeCraft. All rights reserved.</p>
+      <p>Made with ❤️ in Bangladesh</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  let currentView = 'grid';
+
+  function setView(view) {
+    currentView = view;
+    const container = document.getElementById('products-container');
+    container.className = view === 'list' ? 'list-view' : '';
+    document.getElementById('grid-btn').classList.toggle('active', view === 'grid');
+    document.getElementById('list-btn').classList.toggle('active', view === 'list');
+  }
+
+  function getFilters() {
+    const cats = [...document.querySelectorAll('input[name="cat"]:checked')].map(i => i.value);
+    const badges = [...document.querySelectorAll('input[name="badge"]:checked')].map(i => i.value);
+    const ratingEl = document.querySelector('input[name="rating"]:checked');
+    const minPrice = parseFloat(document.getElementById('price-min').value) || 0;
+    const maxPrice = parseFloat(document.getElementById('price-max').value) || Infinity;
+    const sort = document.querySelector('.sort-select').value;
+    return { cats, badges, minPrice, maxPrice, sort, rating: ratingEl ? parseFloat(ratingEl.value) : 0 };
+  }
+
+  function applyFilters() {
+    const { cats, badges, minPrice, maxPrice, sort, rating } = getFilters();
+    let filtered = [...PRODUCTS];
+
+    if (cats.length) filtered = filtered.filter(p => cats.includes(p.category));
+    if (badges.length) filtered = filtered.filter(p => badges.includes(p.badge));
+    filtered = filtered.filter(p => p.price >= minPrice && p.price <= maxPrice);
+    if (rating) filtered = filtered.filter(p => p.rating >= rating);
+
+    if (sort === 'price-low') filtered.sort((a, b) => a.price - b.price);
+    else if (sort === 'price-high') filtered.sort((a, b) => b.price - a.price);
+    else if (sort === 'rating') filtered.sort((a, b) => b.rating - a.rating);
+
+    document.getElementById('count').textContent = filtered.length;
+    const container = document.getElementById('products-container');
+    const noResults = document.getElementById('no-results');
+
+    if (filtered.length === 0) {
+      container.innerHTML = '';
+      noResults.style.display = 'block';
+    } else {
+      noResults.style.display = 'none';
+      container.innerHTML = filtered.map(renderProductCard).join('');
+    }
+  }
+
+  function clearFilters() {
+    document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(i => i.checked = false);
+    document.getElementById('price-min').value = '';
+    document.getElementById('price-max').value = '';
+    document.querySelector('.sort-select').value = 'default';
+    applyFilters();
+  }
+
+  function toggleFilters() {
+    const sidebar = document.querySelector('.sidebar-card');
+    sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Check URL params for category pre-filter
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get('cat');
+    if (cat) {
+      const cb = document.querySelector(`input[name="cat"][value="${cat}"]`);
+      if (cb) cb.checked = true;
+    }
+    applyFilters();
+  });
+</script>
+</body>
+</html>
